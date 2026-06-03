@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Muhammad Afzal | Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --purple: #7C3AED;
+    --purple-light: #A78BFA;
+    --purple-dark: #4C1D95;
+    --white: #FFFFFF;
+    --soft: #F5F0FF;
+    --gray: #E5D9FF;
+    --text: #1a0a2e;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #0a0015;
+    color: var(--white);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Animated background */
+  .bg-glow {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 20% 20%, rgba(124,58,237,0.25) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 40% at 80% 80%, rgba(167,139,250,0.18) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 60% at 50% 50%, rgba(76,29,149,0.15) 0%, transparent 80%);
+    animation: bgPulse 6s ease-in-out infinite alternate;
+  }
+  @keyframes bgPulse {
+    0% { opacity: 0.8; }
+    100% { opacity: 1; }
+  }
+
+  /* Floating particles */
+  .particles {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .particle {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--purple-light);
+    opacity: 0;
+    animation: float linear infinite;
+  }
+  @keyframes float {
+    0% { transform: translateY(100vh) scale(0); opacity: 0; }
+    10% { opacity: 0.6; }
+    90% { opacity: 0.3; }
+    100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+  }
+
+  /* ---- WRAPPER ---- */
+  .wrapper {
+    position: relative;
+    z-index: 1;
+    max-width: 520px;
+    margin: 0 auto;
+    padding: 40px 20px 60px;
+  }
+
+  /* ---- HERO SECTION ---- */
+  .hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px 0 40px;
+    animation: fadeUp 0.8s ease both;
+  }
+
+  /* Profile circle */
+  .avatar-ring {
+    position: relative;
+    width: 140px;
+    height: 140px;
+    margin-bottom: 24px;
+  }
+  .avatar-ring::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    background: conic-gradient(
+      var(--purple) 0deg,
+      var(--purple-light) 120deg,
+      #fff 200deg,
+      var(--purple) 360deg
+    );
+    animation: spin 4s linear infinite;
+  }
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  .avatar-inner {
+    position: absolute;
+    inset: 4px;
+    border-radius: 50%;
+    background: #1a0a2e;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  #avatarImg {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+
+  .hero-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #fff 30%, var(--purple-light) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.1;
+    margin-bottom: 8px;
+  }
+  .hero-title {
+    font-size: 1rem;
+    color: var(--purple-light);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 16px;
+  }
+  .hero-bio {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.6;
+    max-width: 360px;
+  }
+
+  /* ---- DIVIDER ---- */
+  .divider {
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--purple), var(--purple-light));
+    border-radius: 99px;
+    margin: 30px auto;
+  }
+
+  /* ---- SOCIAL LINKS ---- */
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--purple-light);
+    margin-bottom: 16px;
+    text-align: center;
+    opacity: 0.8;
+  }
+
+  .links-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .link-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(124,58,237,0.25);
+    border-radius: 16px;
+    padding: 14px 20px;
+    text-decoration: none;
+    color: var(--white);
+    transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
+    animation: fadeUp 0.8s ease both;
+    position: relative;
+    overflow: hidden;
+  }
+  .link-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(124,58,237,0.15), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .link-card:hover {
+    transform: translateY(-3px) scale(1.02);
+    border-color: rgba(167,139,250,0.5);
+    box-shadow: 0 8px 30px rgba(124,58,237,0.3);
+  }
+  .link-card:hover::before { opacity: 1; }
+
+  .link-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 20px;
+    position: relative;
+    z-index: 1;
+  }
+  .tiktok-icon { background: linear-gradient(135deg, #010101, #2a2a2a); }
+  .youtube-icon { background: linear-gradient(135deg, #cc0000, #ff4444); }
+  .whatsapp-icon { background: linear-gradient(135deg, #075e54, #25d366); }
+  .facebook-icon { background: linear-gradient(135deg, #0866ff, #1877f2); }
+
+  .link-text { position: relative; z-index: 1; }
+  .link-label {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    display: block;
+  }
+  .link-sub {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.45);
+    display: block;
+    margin-top: 2px;
+  }
+
+  .link-arrow {
+    margin-left: auto;
+    color: rgba(167,139,250,0.5);
+    font-size: 18px;
+    transition: transform 0.3s;
+    position: relative;
+    z-index: 1;
+  }
+  .link-card:hover .link-arrow {
+    transform: translateX(4px);
+    color: var(--purple-light);
+  }
+
+  /* WhatsApp CTA button */
+  .whatsapp-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: linear-gradient(135deg, #075e54, #25d366);
+    color: white;
+    text-decoration: none;
+    padding: 16px 32px;
+    border-radius: 50px;
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-top: 24px;
+    box-shadow: 0 4px 20px rgba(37,211,102,0.35);
+    transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
+    animation: fadeUp 1s ease both;
+    animation-delay: 0.5s;
+  }
+  .whatsapp-btn:hover {
+    transform: translateY(-3px) scale(1.04);
+    box-shadow: 0 8px 30px rgba(37,211,102,0.5);
+  }
+  .whatsapp-btn svg {
+    width: 22px; height: 22px;
+  }
+
+  /* ---- CV SECTION ---- */
+  .cv-section {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(124,58,237,0.2);
+    border-radius: 20px;
+    padding: 28px 24px;
+    margin-top: 8px;
+    animation: fadeUp 0.8s ease both;
+    animation-delay: 0.3s;
+  }
+  .cv-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 16px;
+  }
+  .cv-item {
+    background: rgba(124,58,237,0.1);
+    border: 1px solid rgba(124,58,237,0.2);
+    border-radius: 12px;
+    padding: 16px;
+    text-align: center;
+  }
+  .cv-icon { font-size: 24px; margin-bottom: 8px; }
+  .cv-label {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.5);
+    display: block;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .cv-value {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--purple-light);
+  }
+
+  /* ---- FOOTER ---- */
+  .footer {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.25);
+    animation: fadeUp 0.8s ease both;
+    animation-delay: 0.7s;
+  }
+  .footer span {
+    color: var(--purple-light);
+    opacity: 0.6;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Stagger delays for link cards */
+  .link-card:nth-child(1) { animation-delay: 0.1s; }
+  .link-card:nth-child(2) { animation-delay: 0.2s; }
+  .link-card:nth-child(3) { animation-delay: 0.3s; }
+  .link-card:nth-child(4) { animation-delay: 0.4s; }
+</style>
+</head>
+<body>
+
+<!-- Background -->
+<div class="bg-glow"></div>
+<div class="particles" id="particles"></div>
+
+<div class="wrapper">
+
+  <!-- HERO -->
+  <div class="hero">
+
+    <!-- Avatar Circle -->
+    <div class="avatar-ring">
+      <div class="avatar-inner">
+        <img id="avatarImg" src="image.png" alt="Muhammad Afzal">
+      </div>
+    </div>
+
+    <h1 class="hero-name">Muhammad Afzal</h1>
+    <p class="hero-title">Content Creator &amp; Developer</p>
+    <p class="hero-bio">
+      Welcome to my digital space. I create tech content, tutorials, and animations.
+      Follow me on my social platforms!
+    </p>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- SOCIAL LINKS -->
+  <p class="section-title">Find Me Online</p>
+  <div class="links-grid">
+
+    <a href="https://www.tiktok.com/@muhammadafzalking8" target="_blank" class="link-card">
+      <div class="link-icon tiktok-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="white">
+          <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.79 1.53V6.78a4.85 4.85 0 0 1-1.02-.09z"/>
+        </svg>
+      </div>
+      <div class="link-text">
+        <span class="link-label">TikTok</span>
+        <span class="link-sub">@muhammadafzalking8</span>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
+    <a href="https://youtube.com/@codewithafzal-k6y?si=KEbOiukx_56Nd7rJ" target="_blank" class="link-card">
+      <div class="link-icon youtube-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="white">
+          <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.95C5.12 20 12 20 12 20s6.88 0 8.59-.47a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/>
+          <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#cc0000"/>
+        </svg>
+      </div>
+      <div class="link-text">
+        <span class="link-label">YouTube</span>
+        <span class="link-sub">Code With Afzal</span>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
+    <a href="https://whatsapp.com/channel/0029VbCnCVV1CYoJXGmLvA1q" target="_blank" class="link-card">
+      <div class="link-icon whatsapp-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="white">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
+        </svg>
+      </div>
+      <div class="link-text">
+        <span class="link-label">WhatsApp Channel</span>
+        <span class="link-sub">Join for updates</span>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
+    <a href="https://www.facebook.com/share/1CsYMoANLx/" target="_blank" class="link-card">
+      <div class="link-icon facebook-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="white">
+          <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+        </svg>
+      </div>
+      <div class="link-text">
+        <span class="link-label">Facebook</span>
+        <span class="link-sub">Follow my page</span>
+      </div>
+      <span class="link-arrow">›</span>
+    </a>
+
+  </div>
+
+  <!-- WhatsApp Button -->
+  <a href="https://whatsapp.com/channel/0029VbCnCVV1CYoJXGmLvA1q" target="_blank" class="whatsapp-btn">
+    <svg viewBox="0 0 24 24" fill="white">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
+    </svg>
+    Join WhatsApp Channel
+  </a>
+
+  <div class="divider"></div>
+
+  <!-- CV SECTION -->
+  <div class="cv-section">
+    <p class="section-title">About Me</p>
+    <div class="cv-grid">
+      <div class="cv-item">
+        <div class="cv-icon">🎬</div>
+        <span class="cv-label">Specialty</span>
+        <span class="cv-value">Animation</span>
+      </div>
+      <div class="cv-item">
+        <div class="cv-icon">💻</div>
+        <span class="cv-label">Focus</span>
+        <span class="cv-value">Web Dev</span>
+      </div>
+      <div class="cv-item">
+        <div class="cv-icon">📱</div>
+        <span class="cv-label">Platform</span>
+        <span class="cv-value">TikTok & YT</span>
+      </div>
+      <div class="cv-item">
+        <div class="cv-icon">🌍</div>
+        <span class="cv-label">Location</span>
+        <span class="cv-value">Pakistan</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <p>© 2024 <span>Muhammad Afzal</span> · All Rights Reserved</p>
+    <p style="margin-top:6px;">Made with <span>♥</span> for my audience</p>
+  </div>
+
+</div>
+
+<script>
+  // Floating particles
+  const container = document.getElementById('particles');
+  for (let i = 0; i < 25; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.style.cssText = `
+      left: ${Math.random() * 100}%;
+      width: ${Math.random() * 3 + 1}px;
+      height: ${Math.random() * 3 + 1}px;
+      animation-duration: ${Math.random() * 12 + 8}s;
+      animation-delay: ${Math.random() * 10}s;
+      opacity: ${Math.random() * 0.5 + 0.1};
+    `;
+    container.appendChild(p);
+  }
+</script>
+</body>
+</html>
